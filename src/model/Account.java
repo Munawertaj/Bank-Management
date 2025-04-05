@@ -4,16 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Account {
+    private static int accountCounter = 100000000;
     private int accountNumber;
     private double balance;
     private Customer customer;
     private List<Transaction> transactions;
 
-    public Account(int accountNumber, double balance, Customer customer) {
-        this.accountNumber = accountNumber;
-        this.balance = balance;
+    public Account(Customer customer, double balance) {
+        this.accountNumber = ++accountCounter;
         this.customer = customer;
-        this.transactions = new ArrayList<Transaction>();
+        this.balance = balance;
+        this.transactions = new ArrayList<>();
     }
 
     public int getAccountNumber() {
