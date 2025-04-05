@@ -1,16 +1,17 @@
 package model;
 
 public class Customer {
-    private int id;
+    private static int customerCounter = 0;
+    private int customerId;
     private String name;
 
-    public Customer(int id, String name) {
-        this.id = id;
+    public Customer(String name) {
+        this.customerId = ++customerCounter;
         this.name = name;
     }
 
-    public int getId() {
-        return id;
+    public int getCustomerId() {
+        return customerId;
     }
 
     public String getName() {
