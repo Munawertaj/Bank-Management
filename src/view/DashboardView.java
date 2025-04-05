@@ -3,7 +3,7 @@ package view;
 import java.util.Scanner;
 
 public class DashboardView {
-    private static Scanner input = new Scanner(System.in);
+    private static final Scanner input = new Scanner(System.in);
 
     public static int showMenu() {
         System.out.println("\n--- Welcome to Bank Management System ---");
