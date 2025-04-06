@@ -37,9 +37,13 @@ public class Account{
         transactions.add(transaction);
     }
 
-    public boolean increaseBalance(double amount) {
-        if (amount > 0) {
+    public void increaseBalance(double amount) {
             balance += amount;
+    }
+
+    public boolean decreaseBalance(double amount) {
+        if (amount <= balance) {
+            balance -= amount;
             return true;
         }
         return false;
@@ -49,4 +53,6 @@ public class Account{
     public String toString() {
         return "Account [accountNumber=" + accountNumber + ", balance=" + balance + "]";
     }
+
+
 }

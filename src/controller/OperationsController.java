@@ -6,10 +6,7 @@ import model.Transaction;
 import service.AccountService;
 import service.CustomerService;
 import service.TransactionService;
-import view.CreateAccountView;
-import view.DepositView;
-import view.MessageView;
-import view.TransactionView;
+import view.*;
 
 public class OperationsController {
     private final AccountService accountService;
@@ -44,6 +41,23 @@ public class OperationsController {
         }
     }
 
+    public void hadleWithdraw() {
+        int accountNumber = WithdrawView.getAccountNumber();
+        double amount = WithdrawView.getAmount();
+        Account account = accountService.getAccountByNumber(accountNumber);
+
+        if (account != null) {
+            boolean success = transactionService.withdraw(account, amount);
+            if (success) {
+                MessageView.showMessage("Withdrawal successful.");
+            } else {
+                MessageView.showMessage("Insufficient balance.");
+            }
+        } else {
+            MessageView.showMessage("Account not found.");
+        }
+    }
+
     public void showTransactions() {
         int accountNumber = TransactionView.getAccountNumber();
         Account account = accountService.getAccountByNumber(accountNumber);
@@ -54,5 +68,4 @@ public class OperationsController {
             MessageView.showMessage("Account not found.");
         }
     }
-
 }
