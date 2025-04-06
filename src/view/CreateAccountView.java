@@ -1,19 +1,13 @@
 package view;
 
-import java.util.Scanner;
+import util.InputValidator;
 
 public class CreateAccountView {
-    private static final Scanner input = new Scanner(System.in);
-
     public static String getCustomerName() {
-        System.out.print("Enter Customer Name: ");
-        return input.nextLine();
+        return InputValidator.getValidName("Enter Customer Name: ");
     }
 
     public static double getInitialDeposit() {
-        System.out.print("Enter Initial Deposit: ");
-        double deposit = input.nextDouble();
-        input.nextLine();
-        return deposit;
+        return InputValidator.getValidAmount("Enter Initial Deposit: ");
     }
 }

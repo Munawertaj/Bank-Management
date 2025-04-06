@@ -24,7 +24,7 @@ public class OperationsController {
         Customer customer = customerService.createCustomer(name);
         Account account = accountService.createAccount(customer);
         transactionService.deposit(account, amount);
-        MessageView.showMessage(account + " has been created");
+        MessageView.showMessage(account + "\n has been created successfully.");
     }
 
     public void handleDeposit() {

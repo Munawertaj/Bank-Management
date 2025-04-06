@@ -5,10 +5,10 @@ import java.util.List;
 
 public class Account{
     private static int accountCounter = 1000;
-    private int accountNumber;
+    private final int accountNumber;
     private double balance;
-    private Customer customer;
-    private List<Transaction> transactions;
+    private final Customer customer;
+    private final List<Transaction> transactions;
 
     public Account(Customer customer) {
         this.accountNumber = ++accountCounter;
@@ -19,10 +19,6 @@ public class Account{
 
     public int getAccountNumber() {
         return accountNumber;
-    }
-
-    public double getBalance() {
-        return balance;
     }
 
     public String getName() {
@@ -51,7 +47,6 @@ public class Account{
 
     @Override
     public String toString() {
-        return "Account [accountNumber=" + accountNumber + "Name=" + getName() + ", balance=" + balance + "]";
+        return "Account Details:\n Name: " + getName() + "\n AccountNumber=" + accountNumber + "\n balance:" + balance + "\n";
     }
-
 }

@@ -1,17 +1,14 @@
 package view;
 
-import java.util.Scanner;
+
+import util.InputValidator;
 
 public class WithdrawView {
-    private static final Scanner input = new Scanner(System.in);
-
     public static int getAccountNumber() {
-        System.out.print("Enter Account Number to Withdraw: ");
-        return input.nextInt();
+        return InputValidator.getValidAccountNumber("Enter Account Number to Withdraw: ");
     }
 
     public static double getAmount() {
-        System.out.print("Enter Amount to Withdraw: ");
-        return input.nextDouble();
+        return InputValidator.getValidAmount("Enter Amount to Withdraw: ");
     }
 }

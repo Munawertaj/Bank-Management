@@ -1,22 +1,17 @@
 package view;
 
-import java.util.Scanner;
+import util.InputValidator;
 
 public class TransferView {
-    private static final Scanner input = new Scanner(System.in);
-
     public static int getSenderAccount() {
-        System.out.print("Enter Sender Account Number: ");
-        return input.nextInt();
+        return InputValidator.getValidAccountNumber("Enter Sender Account Number: ");
     }
 
     public static int getReceiverAccount() {
-        System.out.print("Enter Receiver Account Number: ");
-        return input.nextInt();
+        return InputValidator.getValidAccountNumber("Enter Receiver Account Number: ");
     }
 
     public static double getAmount() {
-        System.out.print("Enter Amount to Transfer: ");
-        return input.nextDouble();
+        return InputValidator.getValidAmount("Enter Amount to Transfer: ");
     }
 }

@@ -2,9 +2,6 @@ package service;
 
 import model.Account;
 import model.Transaction;
-import view.TransactionView;
-
-import java.util.List;
 
 public class TransactionService {
 
