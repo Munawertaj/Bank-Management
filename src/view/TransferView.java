@@ -4,11 +4,11 @@ import util.InputValidator;
 
 public class TransferView {
     public static int getSenderAccount() {
-        return InputValidator.getValidAccountNumber("Enter Sender Account Number: ");
+        return InputValidator.getValidAccount("Enter Sender Account Number: ");
     }
 
     public static int getReceiverAccount() {
-        return InputValidator.getValidAccountNumber("Enter Receiver Account Number: ");
+        return InputValidator.getValidAccount("Enter Receiver Account Number: ");
     }
 
     public static double getAmount() {

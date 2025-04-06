@@ -1,26 +1,25 @@
 package service;
 
+import exception.AccountNotFoundException;
 import model.Account;
-import model.Customer;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AccountService {
-    private final List<Account> accountList = new ArrayList<>();
+    private final Map<Integer, Account> accounts = new HashMap<>();
 
-    public Account createAccount(Customer customer) {
+    public Account createAccount(model.Customer customer) {
         Account account = new Account(customer);
-        accountList.add(account);
+        accounts.put(account.getAccountNumber(), account);
         return account;
     }
 
-    public Account getAccountByNumber(int accountNumber) {
-        for (Account account : accountList) {
-            if (account.getAccountNumber() == accountNumber) {
-                return account;
-            }
+    public Account getAccountByNumber(int accountNumber) throws AccountNotFoundException {
+        Account account = accounts.get(accountNumber);
+        if (account == null) {
+            throw new AccountNotFoundException("Account number " + accountNumber + " not found.");
         }
-        return null;
+        return account;
     }
 }

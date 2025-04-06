@@ -1,39 +1,27 @@
 package model;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Transaction {
-    private static int transactionCounter = 1000;
-    private int transactionId;
-    private double amount;
-    private String description;
-    private LocalDateTime timestamp;
+    private static int idCounter = 0;
+    private final int transactionId;
+    private final double amount;
+    private final String type;
+    private final String timestamp;
 
-    public Transaction(double amount, String description) {
-        this.transactionId = ++transactionCounter;
+    public Transaction(double amount, String type) {
+        this.transactionId = ++idCounter;
         this.amount = amount;
-        this.description = description;
-        this.timestamp = LocalDateTime.now();
-    }
-
-    public int getTransactionId() {
-        return transactionId;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public LocalDateTime getTimestamp() {
-        return timestamp;
+        this.type = type;
+        this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 
     @Override
     public String toString() {
-        return "[Txn ID: " + transactionId + "], Amount: " + amount + ", Details: " + description +", Timestamp: " + timestamp;
+        return "Transaction ID: " + transactionId +
+                " | Type: " + type +
+                " | Amount: " + amount +
+                " | Time: " + timestamp;
     }
 }

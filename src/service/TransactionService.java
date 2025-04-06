@@ -1,5 +1,7 @@
 package service;
 
+import exception.IllegalOperationException;
+import exception.InsufficientFundsException;
 import model.Account;
 import model.Transaction;
 
@@ -7,30 +9,32 @@ public class TransactionService {
 
     public void deposit(Account account, double amount) {
         account.increaseBalance(amount);
-        Transaction transaction = new Transaction(amount, "Deposited");
-        account.addTransaction(transaction);
+        account.addTransaction(new Transaction(amount, "Deposited"));
     }
 
-    public boolean withdraw(Account account, double amount) {
-        boolean success = account.decreaseBalance(amount);
-
-        if (success) {
-            Transaction transaction = new Transaction(amount, "Withdrawn");
-            account.addTransaction(transaction);
+    public void withdraw(Account account, double amount) throws InsufficientFundsException {
+        if (account.getBalance() < amount) {
+            throw new InsufficientFundsException("Insufficient balance.");
         }
-        return success;
+        account.decreaseBalance(amount);
+        account.addTransaction(new Transaction(amount, "Withdrawn"));
     }
 
-    public boolean transfer(Account sender, Account receiver, double amount) {
-        boolean success = sender.decreaseBalance(amount);
+    public void transfer(Account sender, Account receiver, double amount)
+            throws InsufficientFundsException, IllegalOperationException {
 
-        if (success) {
-            receiver.increaseBalance(amount);
-            Transaction sentTxn = new Transaction(amount, "Sent to Account No: " + receiver.getAccountNumber());
-            Transaction receivedTxn = new Transaction(amount, "Received From Account No: " + sender.getAccountNumber());
-            sender.addTransaction(sentTxn);
-            receiver.addTransaction(receivedTxn);
+        if (sender.getAccountNumber() == receiver.getAccountNumber()) {
+            throw new IllegalOperationException("Illegal operation: Cannot transfer to the same account.");
         }
-        return success;
+
+        if (sender.getBalance() < amount) {
+            throw new InsufficientFundsException("Insufficient balance.");
+        }
+
+        sender.decreaseBalance(amount);
+        receiver.increaseBalance(amount);
+
+        sender.addTransaction(new Transaction(amount, "Sent to Account No: " + receiver.getAccountNumber()));
+        receiver.addTransaction(new Transaction(amount, "Received from Account No: " + sender.getAccountNumber()));
     }
 }

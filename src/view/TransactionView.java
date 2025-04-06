@@ -8,7 +8,7 @@ import java.util.List;
 public class TransactionView {
 
     public static int getAccountNumber() {
-        return InputValidator.getValidAccountNumber("Enter Account Number to View Transactions: ");
+        return InputValidator.getValidAccount("Enter Account Number to View Transactions: ");
     }
 
     public static void showAllTransactions(List<Transaction> transactions) {

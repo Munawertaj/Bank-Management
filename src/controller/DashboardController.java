@@ -11,9 +11,7 @@ public class DashboardController {
     }
 
     public void start() {
-        boolean isRunning = true;
-
-        while (isRunning) {
+        while (true) {
             int choice = DashboardView.showMenu();
             switch (choice) {
                 case 1 -> operationsController.createAccount();
@@ -22,11 +20,14 @@ public class DashboardController {
                 case 4 -> operationsController.handleTransfer();
                 case 5 -> operationsController.showTransactions();
                 case 6 -> {
-                    MessageView.showMessage("Thank you for using Bank Management System !!");
-                    isRunning = false;
+                    exitApp();
+                    return;
                 }
-                default -> MessageView.showMessage("Sorry, that is not a valid option !!");
             }
         }
+    }
+
+    private void exitApp() {
+        MessageView.showMessage("Thank you for using the Bank Management System. Goodbye!");
     }
 }

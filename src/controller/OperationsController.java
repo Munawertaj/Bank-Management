@@ -1,5 +1,8 @@
 package controller;
 
+import exception.AccountNotFoundException;
+import exception.IllegalOperationException;
+import exception.InsufficientFundsException;
 import model.Account;
 import model.Customer;
 import service.AccountService;
@@ -28,63 +31,51 @@ public class OperationsController {
     }
 
     public void handleDeposit() {
-        int accountNumber = DepositView.getAccountNumber();
-        double amount = DepositView.getAmount();
-        Account account = accountService.getAccountByNumber(accountNumber);
-
-        if (account != null) {
+        try {
+            int accountNumber = DepositView.getAccountNumber();
+            double amount = DepositView.getAmount();
+            Account account = accountService.getAccountByNumber(accountNumber);
             transactionService.deposit(account, amount);
             MessageView.showMessage("Amount: " + amount + " has been deposited successfully.");
-        } else {
-            MessageView.showMessage("Account not found.");
+        } catch (AccountNotFoundException e) {
+            MessageView.showMessage(e.getMessage());
         }
     }
 
     public void handleWithdraw() {
-        int accountNumber = WithdrawView.getAccountNumber();
-        double amount = WithdrawView.getAmount();
-        Account account = accountService.getAccountByNumber(accountNumber);
-
-        if (account != null) {
-            boolean success = transactionService.withdraw(account, amount);
-            if (success) {
-                MessageView.showMessage("Amount: " + amount + " has been withdrawn successfully.");
-            } else {
-                MessageView.showMessage("Insufficient balance.");
-            }
-        } else {
-            MessageView.showMessage("Account not found.");
+        try {
+            int accountNumber = WithdrawView.getAccountNumber();
+            double amount = WithdrawView.getAmount();
+            Account account = accountService.getAccountByNumber(accountNumber);
+            transactionService.withdraw(account, amount);
+            MessageView.showMessage("Amount: " + amount + " has been withdrawn successfully.");
+        } catch (AccountNotFoundException | InsufficientFundsException e) {
+            MessageView.showMessage(e.getMessage());
         }
     }
 
     public void showTransactions() {
-        int accountNumber = TransactionView.getAccountNumber();
-        Account account = accountService.getAccountByNumber(accountNumber);
-
-        if (account != null) {
+        try {
+            int accountNumber = TransactionView.getAccountNumber();
+            Account account = accountService.getAccountByNumber(accountNumber);
             TransactionView.showAllTransactions(account.getTransactions());
-        } else {
-            MessageView.showMessage("Account not found.");
+        } catch (AccountNotFoundException e) {
+            MessageView.showMessage(e.getMessage());
         }
     }
 
     public void handleTransfer() {
-        int senderAccountNumber = TransferView.getSenderAccount();
-        int receiverAccountNumber = TransferView.getReceiverAccount();
-        double amount = TransferView.getAmount();
-        Account sender = accountService.getAccountByNumber(senderAccountNumber);
-        Account receiver = accountService.getAccountByNumber(receiverAccountNumber);
+        try {
+            int senderAccountNumber = TransferView.getSenderAccount();
+            int receiverAccountNumber = TransferView.getReceiverAccount();
+            double amount = TransferView.getAmount();
 
-        if (sender != null && receiver != null) {
-            boolean success = transactionService.transfer(sender, receiver, amount);
-            if (success) {
-                MessageView.showMessage("Amount: " + amount + " has been transferred successfully.");
-            }
-            else {
-                MessageView.showMessage("Insufficient balance.");
-            }
-        } else {
-            MessageView.showMessage("Invalid sender or receiver account number.");
+            Account sender = accountService.getAccountByNumber(senderAccountNumber);
+            Account receiver = accountService.getAccountByNumber(receiverAccountNumber);
+            transactionService.transfer(sender, receiver, amount);
+            MessageView.showMessage("Amount: " + amount + " has been transferred successfully.");
+        } catch (AccountNotFoundException | InsufficientFundsException | IllegalOperationException e) {
+            MessageView.showMessage(e.getMessage());
         }
     }
 }

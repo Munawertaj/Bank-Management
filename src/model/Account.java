@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Account{
+public class Account {
     private static int accountCounter = 1000;
     private final int accountNumber;
     private double balance;
@@ -34,19 +34,19 @@ public class Account{
     }
 
     public void increaseBalance(double amount) {
-            balance += amount;
+        balance += amount;
     }
 
-    public boolean decreaseBalance(double amount) {
-        if (amount <= balance) {
-            balance -= amount;
-            return true;
-        }
-        return false;
+    public void decreaseBalance(double amount) {
+        balance -= amount;
+    }
+
+    public double getBalance() {
+        return balance;
     }
 
     @Override
     public String toString() {
-        return "Account Details:\n Name: " + getName() + "\n Account Number: " + accountNumber + "\n Balance: " + balance + "\n";
+        return "Account Details:\nName: " + getName() + "\nAccount Number: " + accountNumber + "\nBalance: " + balance + "\n";
     }
 }
