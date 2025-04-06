@@ -18,7 +18,8 @@ public class DashboardController {
             switch (choice) {
                 case 1 -> operationsController.createAccount();
                 case 2 -> operationsController.handleDeposit();
-                case 3 -> operationsController.hadleWithdraw();
+                case 3 -> operationsController.handleWithdraw();
+                case 4 -> operationsController.handleTransfer();
                 case 5 -> operationsController.showTransactions();
                 case 6 -> {
                     MessageView.showMessage("Thank you for using Bank Management System !!");

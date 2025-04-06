@@ -2,7 +2,6 @@ package controller;
 
 import model.Account;
 import model.Customer;
-import model.Transaction;
 import service.AccountService;
 import service.CustomerService;
 import service.TransactionService;
@@ -41,7 +40,7 @@ public class OperationsController {
         }
     }
 
-    public void hadleWithdraw() {
+    public void handleWithdraw() {
         int accountNumber = WithdrawView.getAccountNumber();
         double amount = WithdrawView.getAmount();
         Account account = accountService.getAccountByNumber(accountNumber);
@@ -66,6 +65,26 @@ public class OperationsController {
             TransactionView.showAllTransactions(account.getTransactions());
         } else {
             MessageView.showMessage("Account not found.");
+        }
+    }
+
+    public void handleTransfer() {
+        int senderAccountNumber = TransferView.getSenderAccount();
+        int receiverAccountNumber = TransferView.getReceiverAccount();
+        double amount = TransferView.getAmount();
+        Account sender = accountService.getAccountByNumber(senderAccountNumber);
+        Account receiver = accountService.getAccountByNumber(receiverAccountNumber);
+
+        if (sender != null && receiver != null) {
+            boolean success = transactionService.transfer(sender, receiver, amount);
+            if (success) {
+                MessageView.showMessage("Transfer successful.");
+            }
+            else {
+                MessageView.showMessage("Insufficient balance.");
+            }
+        } else {
+            MessageView.showMessage("Invalid sender or receiver account number.");
         }
     }
 }
