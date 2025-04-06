@@ -12,8 +12,8 @@ public class CreateAccountView {
 
     public static double getInitialDeposit() {
         System.out.print("Enter Initial Deposit: ");
-        return input.nextDouble();
+        double deposit = input.nextDouble();
+        input.nextLine();
+        return deposit;
     }
-
-
 }
