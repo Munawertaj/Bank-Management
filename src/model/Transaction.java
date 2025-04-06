@@ -10,7 +10,7 @@ public class Transaction {
     private LocalDateTime timestamp;
 
     public Transaction(double amount, String description) {
-        this.transactionId = transactionCounter++;
+        this.transactionId = ++transactionCounter;
         this.amount = amount;
         this.description = description;
         this.timestamp = LocalDateTime.now();
