@@ -7,20 +7,20 @@ public class Transaction {
     private static int idCounter = 0;
     private final int transactionId;
     private final double amount;
-    private final String type;
+    private final String description;
     private final String timestamp;
 
-    public Transaction(double amount, String type) {
+    public Transaction(double amount, String description) {
         this.transactionId = ++idCounter;
         this.amount = amount;
-        this.type = type;
+        this.description = description;
         this.timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 
     @Override
     public String toString() {
         return "Transaction ID: " + transactionId +
-                " | Type: " + type +
+                " | Description: " + description +
                 " | Amount: " + amount +
                 " | Time: " + timestamp;
     }
