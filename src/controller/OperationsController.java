@@ -24,7 +24,7 @@ public class OperationsController {
         Customer customer = customerService.createCustomer(name);
         Account account = accountService.createAccount(customer);
         transactionService.deposit(account, amount);
-        MessageView.showMessage(account + "\n has been created successfully.");
+        MessageView.showMessage(account + "This account has been created successfully.");
     }
 
     public void handleDeposit() {
@@ -34,7 +34,7 @@ public class OperationsController {
 
         if (account != null) {
             transactionService.deposit(account, amount);
-            MessageView.showMessage("Deposit successful.");
+            MessageView.showMessage("Amount: " + amount + " has been deposited successfully.");
         } else {
             MessageView.showMessage("Account not found.");
         }
@@ -48,7 +48,7 @@ public class OperationsController {
         if (account != null) {
             boolean success = transactionService.withdraw(account, amount);
             if (success) {
-                MessageView.showMessage("Withdrawal successful.");
+                MessageView.showMessage("Amount: " + amount + " has been withdrawn successfully.");
             } else {
                 MessageView.showMessage("Insufficient balance.");
             }
@@ -78,7 +78,7 @@ public class OperationsController {
         if (sender != null && receiver != null) {
             boolean success = transactionService.transfer(sender, receiver, amount);
             if (success) {
-                MessageView.showMessage("Transfer successful.");
+                MessageView.showMessage("Amount: " + amount + " has been transferred successfully.");
             }
             else {
                 MessageView.showMessage("Insufficient balance.");

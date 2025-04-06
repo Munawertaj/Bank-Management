@@ -34,6 +34,6 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return "[Txn ID: " + transactionId + "] , Amount: " + amount + ", Note: " + description + ", Timestamp: " + timestamp ;
+        return "[Txn ID: " + transactionId + "], Amount: " + amount + ", Details: " + description +", Timestamp: " + timestamp;
     }
 }

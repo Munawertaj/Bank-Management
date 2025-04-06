@@ -47,6 +47,6 @@ public class Account{
 
     @Override
     public String toString() {
-        return "Account Details:\n Name: " + getName() + "\n AccountNumber=" + accountNumber + "\n balance:" + balance + "\n";
+        return "Account Details:\n Name: " + getName() + "\n Account Number: " + accountNumber + "\n Balance: " + balance + "\n";
     }
 }

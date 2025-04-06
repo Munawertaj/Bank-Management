@@ -7,7 +7,7 @@ public class TransactionService {
 
     public void deposit(Account account, double amount) {
         account.increaseBalance(amount);
-        Transaction transaction = new Transaction(amount, "Deposited to account.");
+        Transaction transaction = new Transaction(amount, "Deposited");
         account.addTransaction(transaction);
     }
 
@@ -15,7 +15,7 @@ public class TransactionService {
         boolean success = account.decreaseBalance(amount);
 
         if (success) {
-            Transaction transaction = new Transaction(amount, "Withdrawn from account.");
+            Transaction transaction = new Transaction(amount, "Withdrawn");
             account.addTransaction(transaction);
         }
         return success;
@@ -26,8 +26,8 @@ public class TransactionService {
 
         if (success) {
             receiver.increaseBalance(amount);
-            Transaction sentTxn = new Transaction(amount, "Transferred to Acc No: " + receiver.getAccountNumber());
-            Transaction receivedTxn = new Transaction(amount, "Transferred From Acc No: " + sender.getAccountNumber());
+            Transaction sentTxn = new Transaction(amount, "Sent to Account No: " + receiver.getAccountNumber());
+            Transaction receivedTxn = new Transaction(amount, "Received From Account No: " + sender.getAccountNumber());
             sender.addTransaction(sentTxn);
             receiver.addTransaction(receivedTxn);
         }
